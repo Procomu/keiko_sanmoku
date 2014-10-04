@@ -41,6 +41,7 @@ void input(void)
 }
 int main(void)
 {
+	// comment by akira aizawa
 	initBoard();
 	initStone();
 	initPlayer();
