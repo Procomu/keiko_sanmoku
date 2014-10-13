@@ -5,15 +5,15 @@
 ## Debug
 ProjectName            :=TicTacToe
 ConfigurationName      :=Debug
-WorkspacePath          := "/Users/kobayashikeiko/Documents/workspace/TicTacToe"
-ProjectPath            := "/Users/kobayashikeiko/Documents/workspace/TicTacToe"
+WorkspacePath          := "/Users/kobayashikeiko/Documents/workspace/keiko_sanmoku"
+ProjectPath            := "/Users/kobayashikeiko/Documents/workspace/keiko_sanmoku"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=小林恵子
-Date                   :=2014-10-04
+Date                   :=2014-10-13
 CodeLitePath           :="/Users/kobayashikeiko/Library/Application Support/codelite"
 LinkerName             :=/usr/bin/g++ 
 SharedObjectLinkerName :=/usr/bin/g++ -dynamiclib -fPIC
@@ -88,7 +88,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/main.c$(ObjectSuffix): main.c $(IntermediateDirectory)/main.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/Users/kobayashikeiko/Documents/workspace/TicTacToe/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/Users/kobayashikeiko/Documents/workspace/keiko_sanmoku/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.c$(DependSuffix): main.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.c$(ObjectSuffix) -MF$(IntermediateDirectory)/main.c$(DependSuffix) -MM "main.c"
 
