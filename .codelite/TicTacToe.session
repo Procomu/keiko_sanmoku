@@ -5,9 +5,11 @@
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="/Users/kobayashikeiko/Documents/workspace/keiko_sanmoku/main.c" Name="FileName"/>
-      <int Value="114" Name="FirstVisibleLine"/>
-      <int Value="97" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
+      <int Value="80" Name="FirstVisibleLine"/>
+      <int Value="88" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks">
+        <wxString Value="61:3"/>
+      </wxArrayString>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
   </TabInfoArray>
