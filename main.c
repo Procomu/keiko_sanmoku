@@ -1,13 +1,13 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-	int board[3][3];	/*盤面の配列オブジェクト*/
-	int stone; 　　　/*石を表す変数 -1,1が入る*/
-	int player; 　　/*プレーヤーを表す変数 0,1が入る*/
-	char row; 　　　/*盤面の列を表す変数 a,b,cが入る*/
-	int temp_row;  /*盤面の列を表す変数 0,1,2が入る*/
-	int column; 　　/*盤面の行を表す変数　0,1,2が入る*/
-	int judge; 　　　/*勝者を判定するときに使用する変数*/
-	int result;   /*ゲームを続けるかどうかをみる*/
+	int board[3][3];
+	int stone;
+	int player;
+	char row;
+	int temp_row;
+	int column;
+	int judge;
+	int result;
 	
 	
 /*---盤面(board変数)の初期化関数---*/
@@ -62,7 +62,7 @@ void showBoard()
 }
 /*---石が置ける場所かどうか判断する---*/
 int putableStone(){
-	if(0 == board[temp_row][column]){
+	if(0 == board[row][column]){
 		result = 1;
 	}
 	return result;
@@ -82,7 +82,7 @@ void changePlayer() {
 /*---ユーザーからの入力を受け付ける関数---*/
 void inputRow()
 {	
-	printf("列を入力：");
+	printf("行を入力：");
 	fflush(stdin);
 	scanf("%c" , &row);
 	switch(row) {
@@ -96,34 +96,33 @@ void inputRow()
 			temp_row = 2;
 			break;
 		default:
-			printf("列を正しく入力してください\n");
-			input();
+			printf("行を正しく入力してください\n");
 			break;
 	}
 }
 void inputColumn(){
-	printf("行を入力：");
+	printf("列を入力：");
 	scanf("%d" , &column);
 	switch(column) {
 		case 0:
 		case 1:
 		case 2:
-			if(putableStone()) {
+			if(putableStone() == 1) {
 					board[temp_row][column] = stone;
 					changeStone();
 					changePlayer();
 					showPlayer();
 					showBoard();
-					input();
+					inputRow();
 			}
 			else{
-					printf("行を正しく入力してください\n");
-					input();
+					printf("列を正しく入力してください\n");
+					inputRow();
 			}
 			break;
 		default:
-				printf("行を正しく入力してください\n");
-				input();
+				printf("列を正しく入力してください\n");
+				inputColumn();
 				break;
 	}
 }
@@ -134,5 +133,6 @@ int main()
 	initPlayer();
 	showPlayer();
 	showBoard();
-	input();
+	inputRow();
+	inputColumn();
 }
