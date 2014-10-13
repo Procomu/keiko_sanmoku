@@ -116,7 +116,7 @@ void inputColumn(){
 					inputRow();
 			}
 			else{
-					printf("列を正しく入力してください\n");
+					printf("行を正しく入力してください\n");
 					inputRow();
 			}
 			break;
