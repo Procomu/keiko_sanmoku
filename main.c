@@ -7,6 +7,7 @@
 	int column; 　　/*盤面の行を表す変数　0,1,2が入る*/
 	int judge; 　　　/*勝者を判定するときに使用する変数*/
 	
+	
 /*---盤面(board変数)の初期化関数---*/
 void initBoard()
 {	
@@ -95,7 +96,7 @@ void input()
 				break;
 	}
 }
-
+u
 int putableStone(){
 	int result = -1;
 	if(0 == board[temp_row][column]){
