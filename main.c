@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-	int board[3][3];
+	int board[5][5];
 	int stone;
 	int player;
 	char row;
@@ -12,11 +12,13 @@
 	
 /*---盤面(board変数)の初期化関数---*/
 void initBoard()
-{	
-	for(int i=0; i<3; i++){
-		for(int j=0; j<3; j++){
-			board[i][j] = 0;
-		}
+{	for (int i=0; i<5; i++){
+		for(int j=0; j<5; j++){
+			if(i == 0 || i == 4 || j == 0 || j == 4){
+				board[i][j] = 2;
+		}else {
+				board[i][j] = 0;
+			}
 	}
 }
 /*---変数Stoneの初期化関数---*/
@@ -32,16 +34,16 @@ void initPlayer(void)
 /*---プレーヤーを見せる--*/
 void showPlayer(){
 	if (0 == player){
-		printf("プレーヤーは白です\n");
+		printf("Player is White\n");
 	}else if(1 == player){
-		printf("プレーヤーは黒です\n");
+		printf("Player is Black\n");
 	}
 }	
 /*---碁盤を見せる--*/	
 void showBoard()
 {
-	for(int i=0; i<3; i++){
-		for(int j=0; j<3; j++){
+	for(int i=1; i<4; i++){
+		for(int j=1; j<4; j++){
 			switch(board[i][j]) {
 			case 0:
 				printf("?");
@@ -62,11 +64,26 @@ void showBoard()
 }
 /*---石が置ける場所かどうか判断する---*/
 int putableStone(){
-	if(0 == board[row][column]){
+	if(0 == board[temp_row][column]){
 		result = 1;
 	}
 	return result;
 }
+/*---勝利鑑定を行う---*/
+int checkWin(){
+	int current[i][j];
+	while(2 == board[temp_row][column]){
+		if(board[temp_row][column]==board[temp_row-1][column-1]){
+			current[i][j] = board[temp_row-1][column-1];
+			if(current[i][j] == board[temp_row-1][column-1){
+				return judge = 1;
+			}else {
+				return judge = 0;
+			}
+		}else {
+			return judge = 0;
+		}
+	}
 /*---石を変える---*/
 void changeStone() {
 	stone *=-1;
@@ -79,6 +96,8 @@ void changePlayer() {
 		player = 0;
 	}
 }
+
+
 /*---ユーザーからの入力を受け付ける関数---*/
 void inputRow()
 {	
@@ -109,6 +128,7 @@ void inputColumn(){
 		case 2:
 			if(putableStone() == 1) {
 					board[temp_row][column] = stone;
+				if(checkWin() == 0){
 					changeStone();
 					changePlayer();
 					showPlayer();
@@ -135,4 +155,5 @@ int main()
 	showBoard();
 	inputRow();
 	inputColumn();
+	
 }
