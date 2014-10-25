@@ -8,28 +8,34 @@
 	int column;
 	int judge;
 	int result;
+	int turn;
 	
 	
 /*---盤面(board変数)の初期化関数---*/
-void initBoard()
-{	for (int i=0; i<5; i++){
+void initBoard(){
+	for (int i=0; i<5; i++){
 		for(int j=0; j<5; j++){
 			if(i == 0 || i == 4 || j == 0 || j == 4){
 				board[i][j] = 2;
 		}else {
 				board[i][j] = 0;
 			}
+		}
 	}
 }
 /*---変数Stoneの初期化関数---*/
-void initStone(void)
-{	
-	stone = -1; 
+void initStone(void){	
+	stone *= -1; 
 }
 /*---変数Stoneの初期化関数---*/
 void initPlayer(void)
 {	
 	player = 0;
+}
+/*---変数Turnの初期化関数---*/
+void initTurn(void)
+{	
+	turn = 0;
 }
 /*---プレーヤーを見せる--*/
 void showPlayer(){
@@ -70,20 +76,39 @@ int putableStone(){
 	return result;
 }
 /*---勝利鑑定を行う---*/
-int checkWin(){
-	int current[i][j];
-	while(2 == board[temp_row][column]){
-		if(board[temp_row][column]==board[temp_row-1][column-1]){
-			current[i][j] = board[temp_row-1][column-1];
-			if(current[i][j] == board[temp_row-1][column-1){
-				return judge = 1;
-			}else {
-				return judge = 0;
+int checkWin(int flag, int check_row, int check_column, int index_row, int index_column){
+	int dir_row[4] = {-1, -1, 0, 1};
+	int dir_column[4] = {0, 1, 1, 1};
+		while(index_row < 5 && index_column < 5){
+			if(2 == board[temp_row + dir_row[index_row]*flag][column + dir_column[index_column]*flag]){
+				if(flag == 1){
+					flag *=-1;
+					checkWin(flag, temp_row, column, index_row, index_column);
+				}else {
+					judge = 1;
+					return judge;
+				}
+			}else if(0 == board[temp_row + dir_row[index_row]*flag][column + dir_column[index_column]*flag]){
+					checkWin(flag, temp_row, column, ++index_row, ++index_column);
+			}else if(stone != board[temp_row + dir_row[index_row]*flag][column + dir_column[index_column]*flag]){
+					checkWin(flag, temp_row, column, ++index_row, ++index_column);
+			}else if(stone == board[temp_row + dir_row[index_row]*flag][column + dir_column[index_column]*flag]){
+				int p_row = temp_row + dir_row[index_row]*flag;
+				int p_column = column + dir_column[index_column]*flag;
+				checkWin(flag, p_row, p_column, index_row, index_column);
 			}
-		}else {
-			return judge = 0;
+		judge = 0;
+		return judge;
 		}
+}
+/*---勝者を表示する---*/
+void dispWinner(){
+	if(0 == player){
+		printf("Winner is White!\n");
+	}else {
+		printf("Winner is Black!\n");
 	}
+}
 /*---石を変える---*/
 void changeStone() {
 	stone *=-1;
@@ -96,8 +121,6 @@ void changePlayer() {
 		player = 0;
 	}
 }
-
-
 /*---ユーザーからの入力を受け付ける関数---*/
 void inputRow()
 {	
@@ -115,12 +138,12 @@ void inputRow()
 			temp_row = 2;
 			break;
 		default:
-			printf("行を正しく入力してください\n");
+			printf("please input row\n");
 			break;
 	}
 }
-void inputColumn(){
-	printf("列を入力：");
+int inputColumn(){
+	printf("Please input column：");
 	scanf("%d" , &column);
 	switch(column) {
 		case 0:
@@ -128,22 +151,18 @@ void inputColumn(){
 		case 2:
 			if(putableStone() == 1) {
 					board[temp_row][column] = stone;
-				if(checkWin() == 0){
-					changeStone();
-					changePlayer();
-					showPlayer();
-					showBoard();
-					inputRow();
-			}
+					turn = turn + 1;
+					return turn;
+					}
 			else{
-					printf("行を正しく入力してください\n");
+					printf("Pleaes input appropriate row:\n");
 					inputRow();
 			}
 			break;
 		default:
-				printf("列を正しく入力してください\n");
-				inputColumn();
-				break;
+			printf("Please input appropriate column:\n");
+			inputColumn();
+			break;
 	}
 }
 int main()
@@ -151,9 +170,17 @@ int main()
 	initBoard();
 	initStone();
 	initPlayer();
-	showPlayer();
-	showBoard();
-	inputRow();
-	inputColumn();
-	
+	initTurn();
+	if(turn < 9){
+		if (checkWin == 0){
+			showBoard();
+			showPlayer();
+			inputRow();
+			inputColumn();
+		}else{
+			dispWinner();
+		}
+	}else{
+		("draw\n");
+	}
 }
