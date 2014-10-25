@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="TicTacToe" InternalType="Console">
   <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00010001N0005Debug000000000000]]>
+    </Plugin>
     <Plugin Name="CMakePlugin">
       <![CDATA[[{
   "name": "Debug",
@@ -13,14 +16,11 @@
   "parentProject": ""
  }]]]>
     </Plugin>
-    <Plugin Name="qmake">
-      <![CDATA[00010001N0005Debug000000000000]]>
-    </Plugin>
   </Plugins>
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="main.c"/>
+    <File Name="main.c" ExcludeProjConfig=""/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

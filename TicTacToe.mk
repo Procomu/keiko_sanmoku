@@ -5,18 +5,18 @@
 ## Debug
 ProjectName            :=TicTacToe
 ConfigurationName      :=Debug
-WorkspacePath          := "/Users/kobayashikeiko/Documents/workspace/keiko_sanmoku"
-ProjectPath            := "/Users/kobayashikeiko/Documents/workspace/keiko_sanmoku"
+WorkspacePath          := "C:\Git\ProComu\keiko_sanmoku"
+ProjectPath            := "C:\Git\ProComu\keiko_sanmoku"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=小林恵子
-Date                   :=2014-10-25
-CodeLitePath           :="/Users/kobayashikeiko/Library/Application Support/codelite"
-LinkerName             :=/usr/bin/g++ 
-SharedObjectLinkerName :=/usr/bin/g++ -dynamiclib -fPIC
+User                   :=AKIRA
+Date                   :=10/25/14
+CodeLitePath           :="C:\Program Files (x86)\CodeLite"
+LinkerName             :=C:/MinGW-4.8.1/bin/g++.exe 
+SharedObjectLinkerName :=C:/MinGW-4.8.1/bin/g++.exe -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.i
@@ -34,7 +34,9 @@ ArchiveOutputSwitch    :=
 PreprocessOnlySwitch   :=-E
 ObjectsFileList        :="TicTacToe.txt"
 PCHCompileFlags        :=
-MakeDirCommand         :=mkdir -p
+MakeDirCommand         :=makedir
+RcCmpOptions           := 
+RcCompilerName         :=C:/MinGW-4.8.1/bin/windres.exe 
 LinkOptions            :=  
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
@@ -47,19 +49,20 @@ LibPath                := $(LibraryPathSwitch).
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := /usr/bin/ar rcu
-CXX      := /usr/bin/g++ 
-CC       := /usr/bin/gcc 
+AR       := C:/MinGW-4.8.1/bin/ar.exe rcu
+CXX      := C:/MinGW-4.8.1/bin/g++.exe 
+CC       := C:/MinGW-4.8.1/bin/gcc.exe 
 CXXFLAGS := -std=c99 -g -O0 -Wall $(Preprocessors)
 CFLAGS   := -std=c99 -g -O0 -Wall $(Preprocessors)
 ASFLAGS  := 
-AS       := /usr/bin/as 
+AS       := C:/MinGW-4.8.1/bin/as.exe 
 
 
 ##
 ## User defined environment variables
 ##
-CodeLiteDir:=/Users/kobayashikeiko/Downloads/codelite.app/Contents/SharedSupport/
+CodeLiteDir:=C:\Program Files (x86)\CodeLite
+UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
 Objects0=$(IntermediateDirectory)/main.c$(ObjectSuffix) 
 
 
@@ -79,7 +82,7 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
 $(IntermediateDirectory)/.d:
-	@test -d ./Debug || $(MakeDirCommand) ./Debug
+	@$(MakeDirCommand) "./Debug"
 
 PreBuild:
 
@@ -88,7 +91,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/main.c$(ObjectSuffix): main.c $(IntermediateDirectory)/main.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/Users/kobayashikeiko/Documents/workspace/keiko_sanmoku/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Git/ProComu/keiko_sanmoku/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.c$(DependSuffix): main.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.c$(ObjectSuffix) -MF$(IntermediateDirectory)/main.c$(DependSuffix) -MM "main.c"
 
@@ -104,6 +107,7 @@ clean:
 	$(RM) ./Debug/*$(ObjectSuffix)
 	$(RM) ./Debug/*$(DependSuffix)
 	$(RM) $(OutputFile)
+	$(RM) $(OutputFile).exe
 	$(RM) ".build-debug/TicTacToe"
 
 
